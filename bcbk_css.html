@@ -14,7 +14,7 @@
 	var count=0;//点击总数
 	//用闭包函数使每次创建的大框的ID不一样
 		var order=(function(){
-			var li="A";
+			var li="boardb";
 			return function(){
 				if(li=='boarda')li='boardb';
 				else li='boarda';
@@ -24,6 +24,11 @@
 		var locArr=[];
 		//每次点击判定结果
 		function judge(){
+			if(count!=0&&count%15==0){
+				clearTimeout(timer);
+				newtimer=50-count/15*5;
+				timer=setInterval('fall()',newtimer);
+			}
 			var num=this.id.substr(3)
 			if(num!=locArr.pop()){
 				clearTimeout(timer);
@@ -33,11 +38,6 @@
 				loc+=100;
 				this.style.background="silver";
 				count+=1;
-			}
-			if(count!=0&&count%15==0){
-				clearTimeout(timer);
-				newtimer=50-count/15*5;
-				timer=setInterval('fall()',newtimer);
 			}
 		}
 		
@@ -101,7 +101,7 @@
 		window.onload=function(){
 			drawBoard();
 			fall();
-			var timer=setInterval('fall()',50);
+			timer=setInterval('fall()',50);
 		}
 	</script>
 </head>
